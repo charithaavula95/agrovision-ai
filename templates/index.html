@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f1">
+    <meta name="description" content="Upload a crop leaf photo to check for possible disease with AgroVision AI.">
+    <title>AgroVision — Plant health, made clearer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="AgroVision home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M25.8 5.2C15.3 5.4 8.2 8.1 7 15.1c-.7 4.2 2.4 7.4 6.3 6.6 7.1-1.5 10.1-9.3 12.5-16.5Z" fill="currentColor"/><path d="M7.1 26.4c3.1-6.2 7.5-10.4 13-13.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </span>
+        <span>agro<span class="brand-light">vision</span></span>
+      </a>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a class="nav-link" href="#how-it-works">How it works</a>
+        <a class="nav-link" href="#about">About</a>
+      </nav>
+      <a class="header-cta" href="#checker">Check a leaf <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero" id="about">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> A little more insight for every grower</div>
+          <h1>Healthy plants<br>start with <span>a closer look.</span></h1>
+          <p class="hero-description">Upload a clear photo of a leaf. Get an AI-powered check and practical next steps, all in one place.</p>
+          <a class="primary-button hero-button" href="#checker">Check your plant <span aria-hidden="true">↓</span></a>
+          <div class="hero-note"><span class="note-icon" aria-hidden="true">✳</span> A helpful starting point, not a replacement for expert advice.</div>
+        </div>
+        <div class="hero-visual" aria-label="Illustration of a healthy leaf">
+          <div class="visual-orbit orbit-one"></div>
+          <div class="visual-orbit orbit-two"></div>
+          <div class="visual-sun"></div>
+          <svg class="hero-leaf" viewBox="0 0 380 380" fill="none" aria-hidden="true">
+            <path d="M311 63C214 69 98 99 77 191c-13 57 29 99 80 82 91-30 128-130 154-210Z" fill="#6F9D58"/>
+            <path d="M78 305c42-86 104-144 197-202" stroke="#E4E8C9" stroke-width="5" stroke-linecap="round"/>
+            <path d="m141 235-35-9M188 194l-31-31M232 154l-1-40M114 265l-42-5M209 178l-12-47" stroke="#E4E8C9" stroke-width="3" stroke-linecap="round"/>
+            <path d="M313 63c-3 100-37 171-104 214" stroke="#244C36" stroke-opacity=".16" stroke-width="2"/>
+          </svg>
+          <div class="visual-caption"><span class="caption-spark">✳</span><span><strong>Grow with confidence</strong><small>One leaf at a time</small></span></div>
+          <span class="visual-label label-top">LEAF HEALTH</span>
+          <span class="visual-label label-bottom">GROW NATURALLY</span>
+        </div>
+      </section>
+
+      <section class="checker-section" id="checker">
+        <div class="section-heading">
+          <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR PLANT CHECK</div><h2>Let’s take a look.</h2></div>
+          <p>For the clearest check, choose a sharp, well-lit photo of one leaf.</p>
+        </div>
+
+        <div class="checker-grid">
+          <section class="upload-card" aria-labelledby="upload-title">
+            <div class="card-topline"><span class="step-number">01</span><span>ADD A PHOTO</span><span class="supported-formats">JPG or PNG · up to 8 MB</span></div>
+            <h3 id="upload-title">Upload a leaf photo</h3>
+            <p class="card-description">Choose an existing photo or take one with your camera.</p>
+            <input id="leaf-upload" class="visually-hidden" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png">
+            <label id="drop-zone" class="drop-zone" for="leaf-upload" tabindex="0">
+              <span class="upload-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v3A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="drop-title">Drop your photo here</span>
+              <span class="drop-subtitle">or <span>browse files</span> on your device</span>
+              <span id="file-name" class="file-name" aria-live="polite"></span>
+              <img id="image-preview" class="image-preview" alt="Selected leaf photo preview" hidden>
+            </label>
+            <div id="form-message" class="form-message" role="status" aria-live="polite" hidden></div>
+            <button id="analyze-button" class="primary-button analyze-button" type="button" disabled>
+              <span id="button-label">Choose a photo to continue</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+            <p class="privacy-note"><span aria-hidden="true">⌑</span> Your photo is analyzed by this app and isn’t saved to disk.</p>
+          </section>
+
+          <aside class="info-column">
+            <section id="result-card" class="result-card" aria-live="polite" hidden>
+              <div class="card-topline"><span class="step-number">02</span><span>YOUR RESULTS</span></div>
+              <div class="result-content"></div>
+            </section>
+            <section class="how-card" id="how-it-works">
+              <div class="card-topline"><span>HOW IT WORKS</span><span class="leaf-spark" aria-hidden="true">✳</span></div>
+              <ol class="steps-list">
+                <li><span class="step-icon">01</span><span><strong>Choose a leaf</strong><small>Use a clear, close-up JPG or PNG.</small></span></li>
+                <li><span class="step-icon">02</span><span><strong>Get an AI check</strong><small>Your image is compared with the installed model.</small></span></li>
+                <li><span class="step-icon">03</span><span><strong>Explore next steps</strong><small>Review guidance and confirm concerns locally.</small></span></li>
+              </ol>
+            </section>
+            <div class="disclaimer"><span aria-hidden="true">✳</span><p><strong>A note on accuracy</strong><br>AI can make mistakes. This is a helpful starting point, not a professional diagnosis.</p></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true">✳</span><span>agro<span class="brand-light">vision</span></span></a><span>Made for healthier growing. Always ask a local expert when in doubt.</span><a href="/api/health">API status <span aria-hidden="true">↗</span></a></footer>
+  </body>
+</html>
