@@ -142,3 +142,9 @@ AgroVision-AI/
 ## Important limitations
 
 Image classification is only a prediction. Field lighting, backgrounds, crop varieties, pests, nutrient stress, and multiple plant conditions can make results wrong. This API is an educational project, not a substitute for an agricultural expert. Confirm serious or spreading symptoms locally before taking action. No pesticide dosage or treatment is prescribed.
+
+## Deploy from GitHub
+
+This repository includes `render.yaml` for a one-click deployment on Render. Open the [Render deployment page](https://render.com/deploy?repo=https://github.com/charithaavula95/agrovision-ai), sign in, connect GitHub, and approve the `agrovision-ai` blueprint. Render builds the app and gives you a public `onrender.com` URL when deployment finishes.
+
+The deployed website works without a model, but cannot make predictions until compatible model files are installed. For local inference with a model, install `requirements-model.txt`; the standard `requirements.txt` stays lightweight for hosting.
